@@ -1,10 +1,10 @@
-package su.kotindustries.kotnotes;
+package su.kotindustries.KotNotes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KotnotesApplicationTests {
+class KotNotesApplicationTests {
 
 	@Test
 	void contextLoads() {
