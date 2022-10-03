@@ -1,4 +1,4 @@
-package su.kotindustries.KotNotes;
+package su.kotindustries.KotNotes.data;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
