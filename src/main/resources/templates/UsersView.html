@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>KotNotes - Users</title>
+    </head>
+    <body>
+        <div>
+            <h3>Add user</h3>
+            <form action='/action/user/add' method='post'>
+                <input type='text' name='userLogin' placeholder='login'/>
+                <input type='text' name='userPassword' placeholder='password'/>
+                <input type='text' name='userAccessLevel' placeholder='access'/>
+                <input type='submit' name='Add'/>
+            </form>
+        </div>
+    <h2>Users list:</h2>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Login</td>
+            <td>Access</td>
+        </tr>
+        <tr th:each="user : ${userAccounts}">
+            <td th:text="${user.id}">id</td>
+            <td th:text="${user.login}">id</td>
+            <td th:text="${user.accessLevel}">id</td>
+            <td>
+                <form action="/action/user/delete" method="post">
+                    <input type="hidden" name="userId" th:value="${user.id}">
+                    <input type="submit" name="Delete" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </body>
+</html>
