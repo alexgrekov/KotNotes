@@ -12,12 +12,12 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 
 @Controller
-public class MyApiController {
+public class ActionController {
 
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    @PostMapping("/api/user/add")
+    @PostMapping("/action/user/add")
     public String userAdd(@RequestParam(value = "userLogin", defaultValue = "user") String userLogin,
                           @RequestParam(value = "userPassword", defaultValue = "password") String userPassword,
                           @RequestParam(value = "userAccessLevel", defaultValue = "access") String userAccessLevel){
@@ -35,7 +35,7 @@ public class MyApiController {
         userAccountRepository.save(new UserAccount(userLogin, stringHash, accessLevel));
         return "UsersView";
     }
-    @PostMapping("/api/user/delete")
+    @PostMapping("/action/user/delete")
     public String userDel(@RequestParam(value = "userId") String userId){
         if (userAccountRepository.existsById(userId)){
             userAccountRepository.deleteById(userId);

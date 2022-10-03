@@ -6,7 +6,7 @@
     <body>
         <div>
             <h3>Add user</h3>
-            <form action='/api/user/add' method='post'>
+            <form action='/action/user/add' method='post'>
                 <input type='text' name='userLogin' placeholder='login'/>
                 <input type='text' name='userPassword' placeholder='password'/>
                 <input type='text' name='userAccessLevel' placeholder='access'/>
@@ -25,7 +25,7 @@
             <td th:text="${user.login}">id</td>
             <td th:text="${user.accessLevel}">id</td>
             <td>
-                <form action="/api/user/delete" method="post">
+                <form action="/action/user/delete" method="post">
                     <input type="hidden" name="userId" th:value="${user.id}">
                     <input type="submit" name="Delete" value="Delete"/>
                 </form>
