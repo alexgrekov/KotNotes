@@ -1,4 +1,4 @@
-package su.kotindustries.KotNotes.controllers;
+package su.kotindustries.kotnotes.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import su.kotindustries.KotNotes.Notes.Note;
-import su.kotindustries.KotNotes.Notes.NoteRepository;
+import su.kotindustries.kotnotes.Notes.Note;
+import su.kotindustries.kotnotes.Notes.NoteRepository;
 
 import java.util.Optional;
 

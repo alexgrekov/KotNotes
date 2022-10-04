@@ -1,4 +1,4 @@
-package su.kotindustries.KotNotes.Notes;
+package su.kotindustries.kotnotes.Notes;
 
 import org.springframework.data.annotation.Id;
 
