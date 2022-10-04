@@ -1,4 +1,4 @@
-package su.kotindustries.KotNotes.data;
+package su.kotindustries.kotnotes.UserAccounts;
 import org.springframework.data.annotation.Id;
 
 public class UserAccount {

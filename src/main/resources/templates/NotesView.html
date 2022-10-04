@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KotNotes - Users</title>
+    <title>KotNotes - Notes</title>
     <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body class="text-center text-bg-dark">
-<!--------------------------------------------------------------------------------------------------------------------->
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -31,16 +32,9 @@
         </div>
     </header>
 </div>
-<div>
-    <h3>Add user</h3>
-    <form action='/action/user/add' method='post'>
-        <input type='text' name='userLogin' placeholder='login'/>
-        <input type='text' name='userPassword' placeholder='password'/>
-        <input type='text' name='userAccessLevel' placeholder='access'/>
-        <input type='submit' value='Add user'/>
-    </form>
-</div>
+
 <!--------------------------------------------------------------------------------------------------------------------->
+
 <table class="table table-dark table-borderless">
     <thead>
     <tr>
@@ -50,20 +44,33 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${userAccounts}">
-        <th scope="row" th:text="${user.id}">id</th>
-        <td th:text="${user.login}">login</td>
-        <td th:text="${user.accessLevel}">accessLevel</td>
+    <tr>
+        <th scope="row"></th>
+        <td></td>
         <td>
-            <form action="/action/user/delete" method="post">
-                <input type="hidden" name="userId" th:value="${user.id}">
-                <input type="submit" name="Delete" class="btn btn-danger" value="Delete"/>
+            <a href="/notes/add" class="btn btn-success">Write new note</a>
+        </td>
+    </tr>
+    <tr th:each="note : ${notes}">
+        <th scope="row" th:text="${note.caption}">caption</th>
+        <td>
+            <form action="/notes/show" method="get">
+                <input type="hidden" name="noteId" th:value="${note.id}">
+                <input type="submit" class="btn btn-success" value="Open"/>
+            </form>
+        </td>
+        <td>
+            <form action="/action/note/delete" method="post">
+                <input type="hidden" name="noteId" th:value="${note.id}">
+                <input type="submit" class="btn btn-danger" value="Delete"/>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
+
 <!--------------------------------------------------------------------------------------------------------------------->
+
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <p class="col-md-4 mb-0 text-muted">© 2022 KotIndustries</p>
 

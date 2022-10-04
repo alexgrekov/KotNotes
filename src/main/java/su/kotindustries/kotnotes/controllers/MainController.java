@@ -1,4 +1,4 @@
-package su.kotindustries.KotNotes.controllers;
+package su.kotindustries.kotnotes.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
