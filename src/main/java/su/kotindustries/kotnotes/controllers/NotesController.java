@@ -51,18 +51,20 @@ public class NotesController {
                           @RequestParam(value = "noteText", defaultValue = "sample_text") String noteText,
                           @RequestParam(value = "editType", defaultValue = "createNew") String editType,
                           @RequestParam(value = "noteId", defaultValue = "0") String noteId) {
-
-        if (Objects.equals(editType, "createNew")) {
-            Note note = new Note(authorId, noteCaption, noteText);
-            noteRepository.save(note);
-        } else if (Objects.equals(editType, "updateOld")) {
-            Optional<Note> noteSearch = noteRepository.findById(noteId);
-            Note note;
-            if (noteSearch.isPresent()){
-                note=noteSearch.get();
-                note.setCaption(noteCaption);
-                note.setText(noteText);
-            }
+        Note note;
+        switch (editType){
+            case "createNew":
+                note = new Note(authorId, noteCaption, noteText);
+                noteRepository.save(note);
+                break;
+            case "updateOld":
+                Optional<Note> noteSearch = noteRepository.findById(noteId);
+                if (noteSearch.isPresent()){
+                    note=noteSearch.get();
+                    note.setCaption(noteCaption);
+                    note.setText(noteText);
+                }
+                break;
         }
         return "redirect:/notes";
     }
