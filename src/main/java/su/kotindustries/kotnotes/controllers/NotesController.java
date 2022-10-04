@@ -18,21 +18,16 @@ public class NotesController {
 // =========================== GET Methods =============================================
     @GetMapping("/notes")
     public String notesPage(Model model){
-        //Iterable<Note> notes = noteRepository.findAll();
-        //model.addAttribute("notes", notes);
+        Iterable<Note> notes = noteRepository.findAll();
+        model.addAttribute("notes", notes);
         return "NotesView";
     }
-
-
-
-
-
     @GetMapping("/notes/add")
     public String notesAddPage(){
         return "NotesAddView";
     }
     @GetMapping("/notes/show")
-    public String showNote(@RequestParam(value = "id") String id, Model model){
+    public String showNote(@RequestParam(value = "noteId") String id, Model model){
         if (id == null){
             return "redirect:/notes";
         }
@@ -46,16 +41,17 @@ public class NotesController {
                           @RequestParam(value = "noteCaption", defaultValue = "No_caption") String noteCaption,
                           @RequestParam(value = "noteText", defaultValue = "sample_text") String noteText){
 
-        noteRepository.save(new Note(authorId, noteCaption, noteText));
-        return "NotesView";
+        Note note = new Note(authorId, noteCaption, noteText);
+        noteRepository.save(note);
+        return "redirect:/notes";
     }
 
     @PostMapping("/action/note/delete")
-    public String noteDel(@RequestParam(value = "noteId") String noteId){
+    public String noteDel(@RequestParam(value = "noteId", defaultValue = "0") String noteId){
         if (noteRepository.existsById(noteId)) {
             noteRepository.deleteById(noteId);
         }
-        return "NotesView";
+        return "redirect:/notes";
     }
 
 }
