@@ -34,22 +34,18 @@
     </header>
 </div>
 <!--------------------------------------------------------------------------------------------------------------------->
-<form action="/action/note/add" method="post">
-    <!--<input type="hidden" name="authorId" th:value="${user.userId}}"/>-->
-    <input type="text" name="noteCaption" placeholder="Caption"/>
-    <!--<input type="text" name="noteText" placeholder="Text"/>-->
-
+<form action="/action/note/save" method="post">
+<input type="hidden" name="editType" th:value="${editType}">
     <div class="input-group mb-3">
         <span class="input-group-text">Caption</span>
-        <input type="text" class="form-control" aria-label="My caption" name="noteCaption"  >
-        <span class="input-group-text">
-            <input type="submit" class="btn btn-success" value="Add"/>
-        </span>
+        <input type="text" class="form-control" aria-label="My caption" name="noteCaption" th:value="${note.caption}">
+        <input type="submit" value="Save" class="btn btn-success input-group-text">
     </div>
 
     <div class="input-group">
         <span class="input-group-text">Note</span>
-        <textarea class="form-control" aria-label="New note" style="height: 137px;" name="noteText"></textarea>
+        <textarea class="form-control" aria-label="New note" style="height: 137px;" name="noteText"
+                  th:text="${note.text}"></textarea>
     </div>
 </form>
 <!--------------------------------------------------------------------------------------------------------------------->
