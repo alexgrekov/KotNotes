@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KotNotes - Add</title>
+</head>
+<body>
+
+    <div>
+        <a href="/">Back to main page...</a>
+    </div>
+    <h1>New note</h1>
+    <a href="/notes">Back to notes</a>
+    <form action="/action/note/add" method="post">
+        <!--<input type="hidden" name="authorId" th:value="${user.userId}}"/>-->
+        <input type="text" name="noteCaption" placeholder="Caption"/>
+        <input type="text" name="noteText" placeholder="Text"/>
+        <input type="submit" value="Add"/>
+    </form>
+</body>
+</html>

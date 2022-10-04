@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KotNotes - Notes</title>
+</head>
+<body>
+    <div>
+        <a href="/notes/add">Write new note</a>
+    </div>
+    <h2>Users list:</h2>
+    <table>
+        <tr>
+            <td>Caption</td>
+            <td>Delete</td>
+        </tr>
+        <!--<tr th:each="note : ${notes}">
+            <td th:text="${note.login}">Caption</td>
+            <td>
+                <a th:href="/notes/show?id=${note.id}}">Look up...</a>
+            </td>
+            <td>
+            <form action="/action/note/delete" method="post">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <input type="submit" name="Delete" value="Delete"/>
+            </form>
+        </td>
+        </tr>-->
+    </table>
+</body>
+</html>
