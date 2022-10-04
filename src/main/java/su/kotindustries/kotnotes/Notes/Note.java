@@ -2,11 +2,23 @@ package su.kotindustries.kotnotes.Notes;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Date;
+
 public class Note {
 
     @Id
     public String id;
     public String authorId;
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date createDate;
 
     public String getId() {
         return id;

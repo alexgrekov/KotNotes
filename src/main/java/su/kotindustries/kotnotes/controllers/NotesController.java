@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import su.kotindustries.kotnotes.Notes.Note;
 import su.kotindustries.kotnotes.Notes.NoteRepository;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class NotesController {
     @PostMapping("/action/note/save")
     public String noteAdd(@RequestParam(value = "authorId", defaultValue = "6338a22e3a85595ebb17b608") String authorId,
                           @RequestParam(value = "noteCaption", defaultValue = "No_caption") String noteCaption,
-                          @RequestParam(value = "noteText", defaultValue = "sample_text") String noteText,
+                          @RequestParam(value = "noteText", defaultValue = "") String noteText,
                           @RequestParam(value = "editType", defaultValue = "createNew") String editType,
                           @RequestParam(value = "noteId", defaultValue = "0") String noteId) {
         Note note;
@@ -58,12 +59,9 @@ public class NotesController {
                 noteRepository.save(note);
                 break;
             case "updateOld":
-                Optional<Note> noteSearch = noteRepository.findById(noteId);
-                if (noteSearch.isPresent()){
-                    note=noteSearch.get();
-                    note.setCaption(noteCaption);
-                    note.setText(noteText);
-                }
+                note= new Note(authorId, noteCaption, noteText);
+                note.setId(noteId);
+                noteRepository.save(note);
                 break;
         }
         return "redirect:/notes";

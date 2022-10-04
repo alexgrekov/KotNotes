@@ -7,11 +7,11 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body class="text-center text-bg-dark">
-<!--------------------------------------------------------------------------------------------------------------------->
 <div th:insert="~{fragments/header :: header}"></div>
 <!--------------------------------------------------------------------------------------------------------------------->
 <form action="/action/note/save" method="post">
-<input type="hidden" name="editType" th:value="${editType}">
+    <input type="hidden" name="editType" th:value="${editType}">
+    <input type="hidden" name="noteId" th:value="${note.id}">
     <div class="input-group mb-3">
         <span class="input-group-text">Caption</span>
         <input type="text" class="form-control" aria-label="My caption" name="noteCaption" th:value="${note.caption}">
