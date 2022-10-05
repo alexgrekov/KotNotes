@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class secutityConguration {
+public class securityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder){
         UserDetails userAdmin = User.withUsername("admin")
@@ -28,9 +28,19 @@ public class secutityConguration {
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
-        httpSecurity.authorizeRequests()
-                .anyRequest()
-                .authenticated()
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers("/", "/css/**").permitAll()
+
+                .and()
+
+                .authorizeRequests()
+                .antMatchers("/users/**").hasRole("ADMIN")
+
+                .anyRequest().authenticated()
+
+                .and()
+                .formLogin()
                 .and()
                 .httpBasic();
         return httpSecurity.build();
