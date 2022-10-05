@@ -7,23 +7,34 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body class="text-center text-bg-dark">
-<!--------------------------------------------------------------------------------------------------------------------->
 <div th:insert="~{fragments/header :: header}"></div>
-<div>
-    <h3>Add user</h3>
-    <form action='/action/user/add' method='post'>
-        <input type='text' name='userLogin' placeholder='login'/>
-        <input type='text' name='userPassword' placeholder='password'/>
-        <input type='text' name='userAccessLevel' placeholder='access'/>
-        <input type='submit' value='Add user'/>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div class="container">
+    <h3 class="row">Add user</h3>
+    <form action='/action/user/add' method='post' class="row g-3">
+        <div class="form-floating col">
+            <input name='userLogin' type="text" class="form-control" id="floatingInput" placeholder="login">
+            <label for="floatingInput">Login</label>
+        </div>
+        <div class="form-floating col">
+            <input name='userPassword' type="password" class="form-control" id="floatingPassword" placeholder="password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <select name='userAccessLevel' class="form-select col" id="exampleSelect">
+            <option value="1" selected="">User</option>
+            <option value="9">Admin</option>
+        </select>
+        <input type='submit' value='Add user' class="btn btn-primary col form-floating"/>
+
     </form>
 </div>
 <!--------------------------------------------------------------------------------------------------------------------->
 <table class="table table-dark table-borderless">
     <thead>
     <tr>
-        <th scope="col">Caption</th>
-        <th scope="col">Show</th>
+        <th scope="col">Id</th>
+        <th scope="col">Login</th>
+        <th scope="col">Access level</th>
         <th scope="col">Delete</th>
     </tr>
     </thead>
