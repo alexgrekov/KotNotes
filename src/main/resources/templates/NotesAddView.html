@@ -12,8 +12,9 @@
 <form action="/action/note/save" method="post">
     <input type="hidden" name="editType" th:value="${editType}">
     <input type="hidden" name="noteId" th:value="${note.id}">
+    <input type="hidden" name="createDate" th:value="${note.createDate}">
     <div class="input-group mb-3">
-        <span class="input-group-text">Caption</span>
+        <span class="input-group-text" >Caption</span>
         <input type="text" class="form-control" aria-label="My caption" name="noteCaption" th:value="${note.caption}">
         <input type="submit" value="Save" class="btn btn-success input-group-text">
     </div>

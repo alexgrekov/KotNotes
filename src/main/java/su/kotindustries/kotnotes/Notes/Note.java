@@ -2,6 +2,8 @@ package su.kotindustries.kotnotes.Notes;
 
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Note {
@@ -56,14 +58,26 @@ public class Note {
     public String text;
 
 
-    public Note() {}
+    public Note() {
+    }
 
     public Note(String authorId, String caption, String text) {
         this.authorId = authorId;
         this.caption = caption;
         this.text = text;
+        this.createDate = getCurrentDate();
     }
 
+    public Note getUpdatedNote(String caption, String text) {
+        String authorId = this.authorId;
+        Date createDate = this.createDate;
+
+        Note newNote = new Note(authorId, caption, text);
+        newNote.setCreateDate(createDate);
+        newNote.setId(id);
+
+        return newNote;
+    }
     @Override
     public String toString() {
         return String.format(
@@ -71,4 +85,9 @@ public class Note {
                 id, authorId, caption, text);
     }
 
+    private Date getCurrentDate(){
+        Calendar c = Calendar.getInstance();
+        Date date = c.getTime();
+        return date;
+    }
 }

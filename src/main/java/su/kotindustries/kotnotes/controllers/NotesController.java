@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import su.kotindustries.kotnotes.Notes.Note;
 import su.kotindustries.kotnotes.Notes.NoteRepository;
 
-import java.util.Date;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -51,7 +49,9 @@ public class NotesController {
                           @RequestParam(value = "noteCaption", defaultValue = "No_caption") String noteCaption,
                           @RequestParam(value = "noteText", defaultValue = "") String noteText,
                           @RequestParam(value = "editType", defaultValue = "createNew") String editType,
-                          @RequestParam(value = "noteId", defaultValue = "0") String noteId) {
+                          @RequestParam(value = "noteId", defaultValue = "0") String noteId
+
+    ) {
         Note note;
         switch (editType){
             case "createNew":
@@ -59,9 +59,13 @@ public class NotesController {
                 noteRepository.save(note);
                 break;
             case "updateOld":
-                note= new Note(authorId, noteCaption, noteText);
-                note.setId(noteId);
-                noteRepository.save(note);
+
+                Optional<Note> oldNoteSearch = noteRepository.findById(noteId);
+                if (oldNoteSearch.isPresent()){
+                    Note oldNote = oldNoteSearch.get();
+                    note = oldNote.getUpdatedNote(noteCaption, noteText);
+                    noteRepository.save(note);
+                }
                 break;
         }
         return "redirect:/notes";
