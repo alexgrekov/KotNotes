@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KotNotes - Notes</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="text-center text-bg-dark">
+<div th:insert="~{fragments/header :: header}"></div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<table class="table table-dark table-borderless">
+    <thead>
+    <tr>
+        <th scope="col">Caption</th>
+        <th scope="col">Show</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td>
+            <a href="/notes/add" class="btn btn-success">Write new note</a>
+        </td>
+    </tr>
+    <tr th:each="note : ${notes}">
+        <th scope="row" th:text="${note.caption}">caption</th>
+        <td>
+            <form action="/notes/show" method="get">
+                <input type="hidden" name="noteId" th:value="${note.id}">
+                <input type="submit" class="btn btn-success" value="Open"/>
+            </form>
+        </td>
+        <td>
+            <form action="/action/note/delete" method="post">
+                <input type="hidden" name="noteId" th:value="${note.id}">
+                <input type="submit" class="btn btn-danger" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

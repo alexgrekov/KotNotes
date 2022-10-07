@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KotNotes - Add</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="text-center text-bg-dark">
+<div th:insert="~{fragments/header :: header}"></div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<form action="/action/note/save" method="post">
+    <input type="hidden" name="editType" th:value="${editType}">
+    <input type="hidden" name="noteId" th:value="${note.id}">
+    <input type="hidden" name="createDate" th:value="${note.createDate}">
+    <div class="input-group mb-3">
+        <span class="input-group-text" >Caption</span>
+        <input type="text" class="form-control" aria-label="My caption" name="noteCaption" th:value="${note.caption}">
+        <input type="submit" value="Save" class="btn btn-success input-group-text">
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Note</span>
+        <textarea class="form-control" aria-label="New note" style="height: 137px;" name="noteText"
+                  th:text="${note.text}"></textarea>
+    </div>
+</form>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>KotNotes - Users</title>
-    </head>
-    <body>
-        <div>
-            <h3>Add user</h3>
-            <form action='/action/user/add' method='post'>
-                <input type='text' name='userLogin' placeholder='login'/>
-                <input type='text' name='userPassword' placeholder='password'/>
-                <input type='text' name='userAccessLevel' placeholder='access'/>
-                <input type='submit' name='Add'/>
-            </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KotNotes - Users</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="text-center text-bg-dark">
+<div th:insert="~{fragments/header :: header}"></div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div class="container">
+    <h3 class="row">Add user</h3>
+    <form action='/action/user/add' method='post' class="row g-3">
+        <div class="form-floating col">
+            <input name='userLogin' type="text" class="form-control" id="floatingInput" placeholder="login">
+            <label for="floatingInput">Login</label>
         </div>
-    <h2>Users list:</h2>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Login</td>
-            <td>Access</td>
-        </tr>
-        <tr th:each="user : ${userAccounts}">
-            <td th:text="${user.id}">id</td>
-            <td th:text="${user.login}">id</td>
-            <td th:text="${user.accessLevel}">id</td>
-            <td>
-                <form action="/action/user/delete" method="post">
-                    <input type="hidden" name="userId" th:value="${user.id}">
-                    <input type="submit" name="Delete" value="Delete"/>
-                </form>
-            </td>
-        </tr>
-    </table>
-    </body>
+        <div class="form-floating col">
+            <input name='userPassword' type="password" class="form-control" id="floatingPassword" placeholder="password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <select name='userAccessLevel' class="form-select col" id="exampleSelect">
+            <option value="1" selected="">User</option>
+            <option value="9">Admin</option>
+        </select>
+        <input type='submit' value='Add user' class="btn btn-primary col form-floating"/>
+
+    </form>
+</div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<table class="table table-dark table-borderless">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Login</th>
+        <th scope="col">Access level</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${userAccounts}">
+        <th scope="row" th:text="${user.id}">id</th>
+        <td th:text="${user.login}">login</td>
+        <td th:text="${user.accessLevel}">accessLevel</td>
+        <td>
+            <form action="/action/user/delete" method="post">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <input type="submit" name="Delete" class="btn btn-danger" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
 </html>
