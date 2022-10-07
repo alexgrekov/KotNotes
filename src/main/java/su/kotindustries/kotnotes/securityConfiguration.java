@@ -34,6 +34,8 @@ public class securityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
 
+//////// LOGIN, LOGOUT
+
                 .authorizeRequests()
                 .antMatchers("/", "/login, /logout").permitAll()
 
@@ -47,16 +49,24 @@ public class securityConfiguration {
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true)
 
-                .and()
+//////// MAIN ROUTES
 
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/notes/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/action/note/**").hasAnyRole("USER", "ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/action/user/**").hasRole("ADMIN")
+/*
                 .authorizeRequests()
                 .antMatchers("/notes/**", "/action/note/save").hasAnyRole("USER", "ADMIN")
 
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/users/**", "/action/user/add").hasRole("ADMIN")
-
+                .antMatchers("/users/**", "/action/user/*").hasRole("ADMIN")
+*/              .and().csrf().disable();
                 ;
 
 
