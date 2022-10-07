@@ -2,6 +2,7 @@ package su.kotindustries.kotnotes;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -10,6 +11,9 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.lang.reflect.Method;
 
 @Configuration
 @EnableWebSecurity
@@ -27,22 +31,36 @@ public class securityConfiguration {
         return new InMemoryUserDetailsManager(userUser, userAdmin);
     }
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
+
                 .authorizeRequests()
-                .antMatchers("/", "/css/**").permitAll()
+                .antMatchers("/", "/login, /logout").permitAll()
 
                 .and()
 
-                .authorizeRequests()
-                .antMatchers("/users/**").hasRole("ADMIN")
-
-                .anyRequest().authenticated()
-
-                .and()
                 .formLogin()
+                .loginPage("/login")
+
                 .and()
-                .httpBasic();
+
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true)
+
+                .and()
+
+                .authorizeRequests()
+                .antMatchers("/notes/**", "/action/note/save").hasAnyRole("USER", "ADMIN")
+
+                .and()
+
+                .authorizeRequests()
+                .antMatchers("/users/**", "/action/user/add").hasRole("ADMIN")
+
+                ;
+
+
+
         return httpSecurity.build();
     }
     @Bean
