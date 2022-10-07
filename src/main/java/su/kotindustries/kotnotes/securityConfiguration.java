@@ -13,8 +13,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.lang.reflect.Method;
-
 @Configuration
 @EnableWebSecurity
 public class securityConfiguration {
@@ -54,10 +52,10 @@ public class securityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/notes/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/action/note/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/note/**").hasAnyRole("USER", "ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/action/user/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/user/**").hasRole("ADMIN")
                 .and().csrf().disable();
                 ;
 
@@ -67,7 +65,6 @@ public class securityConfiguration {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return encoder;
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

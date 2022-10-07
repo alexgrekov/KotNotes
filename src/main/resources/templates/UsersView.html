@@ -11,7 +11,7 @@
 <!--------------------------------------------------------------------------------------------------------------------->
 <div class="container">
     <h3 class="row">Add user</h3>
-    <form action='/action/user/add' method='post' class="row g-3">
+    <form action='/api/user/add' method='post' class="row g-3">
         <div class="form-floating col">
             <input name='userLogin' type="text" class="form-control" id="floatingInput" placeholder="login">
             <label for="floatingInput">Login</label>
@@ -44,7 +44,7 @@
         <td th:text="${user.login}">login</td>
         <td th:text="${user.accessLevel}">accessLevel</td>
         <td>
-            <form action="/action/user/delete" method="post">
+            <form action="/api/user/delete" method="post">
                 <input type="hidden" name="userId" th:value="${user.id}">
                 <input type="submit" name="Delete" class="btn btn-danger" value="Delete"/>
             </form>
