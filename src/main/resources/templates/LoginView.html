@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KotNotes - Main page</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="text-center text-bg-dark">
+<div th:insert="~{fragments/header :: header}"></div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div class="container">
+    <form class="form-signin" method="post" th:action="@{/login}">
+        <h2 class="form-signin-heading">Sign in</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
+                   autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                   required="">
+        </p>
+        <input name="_csrf" type="hidden" value="08931e23-e17d-41a4-9a5c-be4f64050dd6">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
