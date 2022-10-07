@@ -58,15 +58,7 @@ public class securityConfiguration {
 
                 .antMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/action/user/**").hasRole("ADMIN")
-/*
-                .authorizeRequests()
-                .antMatchers("/notes/**", "/action/note/save").hasAnyRole("USER", "ADMIN")
-
-                .and()
-
-                .authorizeRequests()
-                .antMatchers("/users/**", "/action/user/*").hasRole("ADMIN")
-*/              .and().csrf().disable();
+                .and().csrf().disable();
                 ;
 
 
