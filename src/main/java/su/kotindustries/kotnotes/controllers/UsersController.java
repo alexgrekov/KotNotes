@@ -25,7 +25,7 @@ public class UsersController {
         model.addAttribute("userAccounts", userAccounts);
         return "UsersView";
     }
-    @PostMapping("/action/user/add")
+    @PostMapping("/api/user/add")
     public String userAdd(@RequestParam(value = "userLogin", defaultValue = "user") String userLogin,
                           @RequestParam(value = "userPassword", defaultValue = "password") String userPassword,
                           @RequestParam(value = "userAccessLevel", defaultValue = "access") String userAccessLevel){
@@ -43,7 +43,7 @@ public class UsersController {
         userAccountRepository.save(new UserAccount(userLogin, stringHash, accessLevel));
         return "redirect:/users";
     }
-    @PostMapping("/action/user/delete")
+    @PostMapping("/api/user/delete")
     public String userDel(@RequestParam(value = "userId") String userId){
         if (userAccountRepository.existsById(userId)){
             userAccountRepository.deleteById(userId);

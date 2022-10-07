@@ -28,13 +28,13 @@
     <tr th:each="note : ${notes}">
         <th scope="row" th:text="${note.caption}">caption</th>
         <td>
-            <form action="/notes/show" method="get">
+            <form action="/notes/get" method="get">
                 <input type="hidden" name="noteId" th:value="${note.id}">
                 <input type="submit" class="btn btn-success" value="Open"/>
             </form>
         </td>
         <td>
-            <form action="/action/note/delete" method="post">
+            <form action="/api/note/delete" method="post">
                 <input type="hidden" name="noteId" th:value="${note.id}">
                 <input type="submit" class="btn btn-danger" value="Delete"/>
             </form>
